@@ -1,319 +1,405 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Peter Stam — Author</title>
-<meta name="description" content="Books by Peter Stam. I write about building things — with AI, with 3D printers, and whatever comes next.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Peter Stam — Author · Maker · Builder</title>
+<meta name="description" content="The Peter Stam Series: three books on building things — with AI, with 3D printers, and turning it into a real business. By an 11-year-old author. €1 each.">
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Sora:wght@400;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-::selection { background: #e05a2b22; }
-body {
-  font-family: 'DM Sans', 'Segoe UI', sans-serif;
-  background: #faf8f5;
-  color: #1a1a1a;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  :root{
+    --dark:#0B1220; --paper:#FAFAF7; --ink:#18202B;
+    --b1-navy:#0E2E52; --b1-cyan:#5FD0E6; --b1-violet:#8B7BF0;
+    --b2-cream:#F7F1E7; --b2-orange:#F2681A; --b2-char:#221A12;
+    --b3-dark:#0E2419; --b3-green:#4ED88A; --b3-gold:#F5C542; --b3-paper:#F0F7F2;
+  }
+  html{ scroll-behavior:smooth; }
+  body{ font-family:'Inter',sans-serif; background:var(--dark); color:#EDF1F7; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+  .mono{ font-family:'Space Mono',monospace; }
 
-/* ─── NAV ─── */
-nav {
-  position: fixed; top: 0; width: 100%; padding: 16px 28px;
-  display: flex; justify-content: space-between; align-items: center;
-  z-index: 100; background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: all 0.35s ease;
-}
-nav.scrolled {
-  background: rgba(250,248,245,0.92);
-  backdrop-filter: blur(14px);
-  border-bottom-color: #e5e0d8;
-}
-nav .logo {
-  font-family: 'Playfair Display', serif; font-size: 1.2rem;
-  color: #111; text-decoration: none; font-weight: 800; letter-spacing: -0.02em;
-}
-nav .nav-links { display: flex; gap: 20; align-items: center; }
-nav .nav-links a { color: #555; text-decoration: none; font-size: 0.88rem; font-weight: 500; }
-nav .store-btn {
-  background: #111; color: #faf8f5; padding: 8px 20px; border-radius: 100px;
-  text-decoration: none; font-size: 0.82rem; font-weight: 600; transition: all 0.3s;
-}
-nav .store-btn:hover { background: #e05a2b; }
+  /* ---------- nav ---------- */
+  nav{ position:fixed; top:0; left:0; right:0; z-index:50; transition:background .25s ease, box-shadow .25s ease; }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:72px; }
+  nav.scrolled{ background:rgba(11,18,32,.9); backdrop-filter:blur(12px); box-shadow:0 1px 0 rgba(255,255,255,.08); }
+  .logo{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; letter-spacing:-.3px; }
+  .logo .dot{ color:var(--b3-green); }
+  .navlinks{ display:flex; gap:26px; align-items:center; }
+  .navlinks a{ font-size:14.5px; font-weight:500; color:#B9C2D0; transition:color .15s; }
+  .navlinks a:hover{ color:#fff; }
+  .navlinks .cta{ background:#fff; color:var(--dark); font-weight:700; border-radius:100px; padding:9px 20px; transition:transform .15s ease; }
+  .navlinks .cta:hover{ color:var(--dark); transform:translateY(-2px); }
+  @media(max-width:720px){ .navlinks a:not(.cta){ display:none; } }
 
-/* ─── HERO ─── */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: center; align-items: center; text-align: center;
-  padding: 120px 24px 80px; position: relative; overflow: hidden;
-}
-.hero-circle-1 {
-  position: absolute; top: 8%; right: 5%; width: 320px; height: 320px;
-  background: radial-gradient(circle, #e05a2b08 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
-}
-.hero-circle-2 {
-  position: absolute; bottom: 12%; left: 3%; width: 250px; height: 250px;
-  background: radial-gradient(circle, #2a7de008 0%, transparent 70%);
-  border-radius: 50%; pointer-events: none;
-}
-.hero-tag {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
-  color: #999; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3.2rem, 9vw, 7rem);
-  font-weight: 900; line-height: 0.95; letter-spacing: -0.04em;
-}
-.hero h1 .accent { display: block; font-style: italic; color: #e05a2b; }
-.hero .hero-desc {
-  font-size: clamp(1rem, 2vw, 1.2rem); color: #777;
-  max-width: 440px; margin-top: 28px; line-height: 1.65;
-}
-.hero-btn {
-  display: inline-block; background: #111; color: #faf8f5;
-  padding: 14px 36px; border-radius: 100px; text-decoration: none;
-  font-weight: 700; font-size: 0.95rem; transition: all 0.3s; margin-top: 36px;
-}
-.hero-btn:hover { background: #e05a2b; transform: translateY(-2px); }
-.hero-stats {
-  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
-  color: #bbb; margin-top: 48px;
-}
+  /* ---------- hero ---------- */
+  .hero{ position:relative; min-height:100svh; display:flex; align-items:center; overflow:hidden;
+    background:radial-gradient(130% 90% at 50% 0%, #16233C 0%, #0B1220 62%); }
+  .hero .grid{ position:absolute; inset:0; opacity:.5;
+    background-image:linear-gradient(rgba(120,150,200,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,150,200,.07) 1px, transparent 1px);
+    background-size:110px 110px; mask-image:radial-gradient(80% 70% at 50% 40%, #000 30%, transparent 100%);
+    -webkit-mask-image:radial-gradient(80% 70% at 50% 40%, #000 30%, transparent 100%); }
+  .hero .wrap{ position:relative; display:flex; align-items:center; gap:60px; padding-top:120px; padding-bottom:80px; }
+  .hero-left{ flex:1.1; }
+  .kicker{ display:inline-flex; align-items:center; gap:10px; font-family:'Space Mono',monospace; font-size:13px;
+    letter-spacing:2.5px; text-transform:uppercase; color:#8FA2BE; border:1.5px solid rgba(255,255,255,.16);
+    border-radius:100px; padding:9px 20px; margin-bottom:28px; }
+  .kicker .pulse{ width:8px; height:8px; border-radius:50%; background:var(--b3-green); animation:pulse 2s infinite; }
+  @keyframes pulse{ 0%,100%{ box-shadow:0 0 0 0 rgba(78,216,138,.5);} 50%{ box-shadow:0 0 0 7px rgba(78,216,138,0);} }
+  h1.big{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(42px,6.2vw,76px); line-height:1.02; letter-spacing:-2.5px; }
+  h1.big .a1{ color:var(--b1-cyan); } h1.big .a2{ color:var(--b2-orange); } h1.big .a3{ color:var(--b3-green); }
+  .hero-sub{ margin-top:24px; font-size:19px; line-height:1.65; color:#AEB9CA; max-width:520px; }
+  .hero-cta{ margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .btn{ display:inline-block; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16.5px;
+    border-radius:100px; padding:15px 30px; transition:transform .18s ease, box-shadow .18s ease; }
+  .btn.primary{ background:linear-gradient(90deg, var(--b1-cyan), var(--b3-green)); color:#07101B; }
+  .btn.primary:hover{ transform:translateY(-3px); box-shadow:0 14px 34px rgba(78,216,138,.3); }
+  .btn.ghost{ border:2px solid rgba(255,255,255,.22); color:#fff; }
+  .btn.ghost:hover{ transform:translateY(-3px); border-color:rgba(255,255,255,.45); }
+  .hero-note{ font-family:'Space Mono',monospace; font-size:13px; color:#77879D; margin-top:18px; }
+  .hero-right{ flex:1; display:flex; justify-content:center; perspective:1200px; }
+  .fan{ position:relative; width:340px; height:480px; }
+  .fan img{ position:absolute; width:270px; border-radius:10px; box-shadow:0 30px 70px rgba(0,0,0,.55);
+    transition:transform .4s cubic-bezier(.2,.7,.3,1); }
+  .fan img.c1{ left:-60px; top:40px; transform:rotate(-9deg); z-index:1; }
+  .fan img.c2{ left:35px;  top:12px; transform:rotate(1deg);  z-index:2; }
+  .fan img.c3{ left:130px; top:40px; transform:rotate(9deg);  z-index:3; }
+  .fan:hover img.c1{ transform:rotate(-13deg) translate(-26px,-10px); }
+  .fan:hover img.c2{ transform:rotate(0deg) translateY(-22px); }
+  .fan:hover img.c3{ transform:rotate(13deg) translate(26px,-10px); }
+  @media(max-width:880px){ .hero .wrap{ flex-direction:column; } .fan{ transform:scale(.85); } }
 
-/* ─── SECTION TITLES ─── */
-.section-title {
-  font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 800; letter-spacing: -0.02em; text-align: center;
-}
-.section-line {
-  width: 48px; height: 3px; background: #e05a2b;
-  margin: 16px auto 0; border-radius: 2px;
-}
+  /* ---------- series strip ---------- */
+  .strip{ background:#0F1828; border-top:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07); }
+  .strip .wrap{ display:flex; justify-content:center; gap:clamp(20px,6vw,80px); padding:26px 28px; flex-wrap:wrap; }
+  .stat{ text-align:center; }
+  .stat .n{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:26px; }
+  .stat .l{ font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:2px; text-transform:uppercase; color:#77879D; margin-top:3px; }
 
-/* ─── BOOKS ─── */
-#books { padding: 80px 24px 100px; }
-.books-wrap { max-width: 960px; margin: 0 auto; }
-.books-list { display: flex; flex-direction: column; gap: 40px; margin-top: 56px; }
+  /* ---------- shared book section bits ---------- */
+  .book{ padding:110px 0; }
+  .book .wrap{ display:flex; gap:64px; align-items:center; }
+  .book.flip .wrap{ flex-direction:row-reverse; }
+  .bcover{ flex:0 0 340px; perspective:1000px; }
+  .bcover img{ width:100%; border-radius:12px; display:block; transition:transform .45s cubic-bezier(.2,.7,.3,1); }
+  .bcover:hover img{ transform:rotateY(-7deg) rotateX(3deg) translateY(-10px) scale(1.02); }
+  .binfo{ flex:1; }
+  .booktag{ display:inline-block; font-family:'Space Mono',monospace; font-weight:700; font-size:12.5px;
+    letter-spacing:2.5px; text-transform:uppercase; border-radius:100px; padding:8px 18px; margin-bottom:20px; }
+  .binfo h2{ font-size:clamp(30px,3.6vw,44px); line-height:1.05; letter-spacing:-1.2px; margin-bottom:16px; }
+  .binfo .desc{ font-size:17.5px; line-height:1.65; margin-bottom:22px; max-width:520px; }
+  .feat{ list-style:none; margin-bottom:30px; }
+  .feat li{ position:relative; padding-left:28px; font-size:15.5px; line-height:1.5; margin-bottom:10px; }
+  .feat li::before{ content:"→"; position:absolute; left:0; font-weight:700; }
+  .bmeta{ font-family:'Space Mono',monospace; font-size:13px; margin-top:14px; opacity:.75; }
+  .bbtn{ display:inline-block; font-weight:700; font-size:16px; border-radius:100px; padding:14px 28px;
+    transition:transform .18s ease, box-shadow .18s ease; }
+  .bbtn:hover{ transform:translateY(-3px); }
+  .price{ display:inline-block; font-family:'Space Mono',monospace; font-size:14px; margin-left:14px; opacity:.8; }
+  @media(max-width:880px){ .book .wrap, .book.flip .wrap{ flex-direction:column; } .bcover{ flex:none; width:min(320px,80%); } }
 
-.book-card {
-  background: #fff; border-radius: 20px; overflow: hidden;
-  border: 1px solid #eee; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  transition: all 0.4s ease;
-  opacity: 0; transform: translateY(28px);
-}
-.book-card.visible { opacity: 1; transform: translateY(0); }
-.book-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+  /* Book 1 — navy blueprint */
+  .b1{ background:var(--b1-navy); color:#EAF2FB;
+    background-image:linear-gradient(rgba(120,170,220,.08) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(120,170,220,.08) 1.5px, transparent 1.5px);
+    background-size:120px 120px; }
+  .b1 .booktag{ color:var(--b1-cyan); background:rgba(95,208,230,.12); border:1.5px solid rgba(95,208,230,.4); }
+  .b1 h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; }
+  .b1 .desc{ color:#BAD4EF; }
+  .b1 .feat li::before{ color:var(--b1-cyan); }
+  .b1 .bbtn{ background:var(--b1-cyan); color:#07222F; }
+  .b1 .bbtn:hover{ box-shadow:0 14px 32px rgba(95,208,230,.35); }
 
-.book-header {
-  padding: 32px 36px; position: relative; overflow: hidden;
-  display: flex; justify-content: space-between; align-items: flex-start;
-  flex-wrap: wrap; gap: 16;
-}
-.book-header .circle-1 {
-  position: absolute; top: -40px; right: -40px; width: 160px; height: 160px;
-  background: rgba(255,255,255,0.08); border-radius: 50%;
-}
-.book-header .circle-2 {
-  position: absolute; bottom: -20px; left: 30%; width: 100px; height: 100px;
-  background: rgba(255,255,255,0.05); border-radius: 50%;
-}
-.book-info { flex: 1; min-width: 240px; position: relative; }
-.book-badge {
-  display: inline-block; background: rgba(255,255,255,0.2);
-  color: white; padding: 3px 12px; border-radius: 100px;
-  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 10px;
-}
-.book-title {
-  font-family: 'Playfair Display', serif; color: white;
-  font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800;
-  line-height: 1.15; letter-spacing: -0.01em;
-}
-.book-subtitle {
-  color: rgba(255,255,255,0.75); font-size: 0.88rem;
-  margin-top: 8px; line-height: 1.5; max-width: 460px;
-}
-.book-price-area { text-align: right; position: relative; }
-.book-price {
-  font-family: 'Playfair Display', serif; color: white;
-  font-size: 2rem; font-weight: 800;
-}
-.book-meta {
-  color: rgba(255,255,255,0.6); font-size: 0.72rem;
-  font-family: 'JetBrains Mono', monospace;
-}
+  /* Book 2 — warm cream */
+  .b2{ background:var(--b2-cream); color:var(--b2-char); }
+  .b2 .booktag{ color:#C06A1E; background:#FCEBDD; border:1.5px solid #F4CDA9; }
+  .b2 h2{ font-family:'Sora',sans-serif; font-weight:800; }
+  .b2 .desc{ color:#6c5c4a; }
+  .b2 .feat li::before{ color:var(--b2-orange); }
+  .b2 .bbtn{ background:var(--b2-orange); color:#fff; }
+  .b2 .bbtn:hover{ box-shadow:0 14px 32px rgba(242,104,26,.35); }
 
-.book-content { padding: 28px 36px 32px; }
-.book-content .label {
-  font-size: 0.82rem; font-weight: 600; color: #999;
-  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;
-}
-.highlight-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 8px; }
-.highlight-arrow { font-size: 0.9rem; margin-top: 2px; flex-shrink: 0; }
-.highlight-text { font-size: 0.92rem; color: #444; line-height: 1.45; }
+  /* Book 3 — green growth */
+  .b3{ background:var(--b3-dark); color:#EAF3EC;
+    background-image:repeating-linear-gradient(180deg, rgba(78,216,138,.04) 0 26px, rgba(78,216,138,0) 26px 52px); }
+  .b3 .booktag{ color:var(--b3-green); background:rgba(78,216,138,.1); border:1.5px solid rgba(78,216,138,.35); }
+  .b3 h2{ font-family:'Bricolage Grotesque',sans-serif; font-weight:800; }
+  .b3 .desc{ color:#B9D4C3; }
+  .b3 .feat li::before{ color:var(--b3-gold); }
+  .b3 .bbtn{ background:var(--b3-green); color:#08160F; }
+  .b3 .bbtn:hover{ box-shadow:0 14px 32px rgba(78,216,138,.35); }
 
-.book-buy-btn {
-  display: inline-block; color: white; padding: 12px 32px;
-  border-radius: 100px; text-decoration: none; font-weight: 700;
-  font-size: 0.9rem; transition: all 0.3s; margin-top: 24px;
-}
-.book-buy-btn:hover { transform: translateY(-2px); }
+  /* ---------- bundle ---------- */
+  .bundle{ background:linear-gradient(120deg, #101B30 0%, #0B1220 100%); padding:100px 0; text-align:center; }
+  .bundle h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,4vw,46px); letter-spacing:-1.2px; }
+  .bundle h2 .g{ background:linear-gradient(90deg, var(--b1-cyan), var(--b2-orange), var(--b3-green));
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .bundle p{ color:#AEB9CA; font-size:17.5px; max-width:540px; margin:18px auto 34px; line-height:1.6; }
+  .minis{ display:flex; justify-content:center; gap:18px; margin-bottom:38px; }
+  .minis img{ width:130px; border-radius:8px; box-shadow:0 16px 36px rgba(0,0,0,.5); transition:transform .3s ease; }
+  .minis img:hover{ transform:translateY(-10px) scale(1.05); }
 
-/* ─── ABOUT ─── */
-#about { padding: 80px 24px; background: #fff; }
-.about-wrap {
-  max-width: 640px; margin: 0 auto; text-align: center;
-  opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(0.16,1,0.3,1);
-}
-.about-wrap.visible { opacity: 1; transform: translateY(0); }
-.about-bio { font-size: 1.05rem; color: #555; line-height: 1.7; margin-top: 24px; }
-.about-btn {
-  display: inline-block; background: #111; color: #faf8f5;
-  padding: 12px 28px; border-radius: 100px; text-decoration: none;
-  font-weight: 600; font-size: 0.88rem; transition: all 0.3s; margin-top: 32px;
-}
-.about-btn:hover { background: #e05a2b; }
-.about-stats {
-  margin-top: 40px; padding: 24px 28px; background: #faf8f5;
-  border-radius: 14px; border: 1px solid #eee;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #999;
-}
+  /* ---------- peek inside ---------- */
+  .peek{ background:#0F1828; padding:100px 0; text-align:center; }
+  .peek h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,42px); letter-spacing:-1px; }
+  .peek .sub{ color:#AEB9CA; font-size:17px; margin:14px auto 44px; max-width:520px; line-height:1.6; }
+  .peekrow{ display:flex; justify-content:center; gap:30px; flex-wrap:wrap; }
+  .pcard{ width:300px; }
+  .pcard img{ width:100%; border-radius:10px; box-shadow:0 20px 44px rgba(0,0,0,.5); transition:transform .35s cubic-bezier(.2,.7,.3,1); display:block; }
+  .pcard:nth-child(1) img{ transform:rotate(-2deg); } .pcard:nth-child(3) img{ transform:rotate(2deg); }
+  .pcard:hover img{ transform:rotate(0deg) translateY(-12px) scale(1.04); }
+  .pcard .pl{ font-family:'Space Mono',monospace; font-size:12.5px; letter-spacing:2px; text-transform:uppercase; margin-top:16px; }
+  .pcard:nth-child(1) .pl{ color:var(--b1-cyan); } .pcard:nth-child(2) .pl{ color:var(--b2-orange); } .pcard:nth-child(3) .pl{ color:var(--b3-green); }
 
-/* ─── FOOTER ─── */
-footer {
-  text-align: center; padding: 28px 24px;
-  border-top: 1px solid #e5e0d8; font-size: 0.8rem; color: #aaa;
-}
+  /* ---------- faq ---------- */
+  .faq{ background:var(--paper); color:var(--ink); padding:0 0 110px; }
+  .faq h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(26px,3.2vw,36px); letter-spacing:-1px; text-align:center; margin-bottom:36px; }
+  .faq details{ max-width:720px; margin:0 auto 12px; background:#fff; border:2px solid #E5E7E0; border-radius:16px; overflow:hidden; }
+  .faq summary{ cursor:pointer; list-style:none; display:flex; justify-content:space-between; align-items:center;
+    padding:19px 24px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16.5px; }
+  .faq summary::after{ content:"+"; font-size:22px; color:#159A57; font-weight:700; transition:transform .2s ease; }
+  .faq details[open] summary::after{ transform:rotate(45deg); }
+  .faq details p{ padding:0 24px 20px; font-size:15.5px; line-height:1.6; color:#4b5763; }
 
-/* ─── MOBILE ─── */
-@media (max-width: 600px) {
-  nav { padding: 12px 16px; }
-  nav .nav-links a:not(.store-btn) { display: none; }
-  .book-header { padding: 24px 20px; }
-  .book-content { padding: 20px 20px 24px; }
-  .book-price-area { text-align: left; }
-}
+  /* ---------- also-by strip ---------- */
+  .also{ background:#F2B43E; color:#1B2A3D; padding:40px 0; }
+  .also .wrap{ display:flex; align-items:center; justify-content:center; gap:20px; flex-wrap:wrap; text-align:center; }
+  .also .at{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; }
+  .also .ab{ display:inline-block; background:#1B2A3D; color:#fff; font-weight:700; font-size:15px;
+    border-radius:100px; padding:12px 24px; transition:transform .18s ease; }
+  .also .ab:hover{ transform:translateY(-3px); }
+
+  /* ---------- about ---------- */
+  .about{ background:var(--paper); color:var(--ink); padding:110px 0; }
+  .about .wrap{ display:flex; gap:70px; align-items:flex-start; }
+  .about h2{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(28px,3.4vw,40px); letter-spacing:-1px; margin-bottom:22px; }
+  .about .col1{ flex:1.2; }
+  .about p{ font-size:17.5px; line-height:1.7; color:#3d4854; margin-bottom:16px; max-width:600px; }
+  .about .facts{ flex:.8; display:flex; flex-direction:column; gap:14px; }
+  .fact{ border:2px solid #E5E7E0; border-radius:18px; padding:20px 24px; background:#fff; transition:transform .2s ease, box-shadow .2s ease; }
+  .fact:hover{ transform:translateY(-4px); box-shadow:0 12px 28px rgba(20,30,40,.08); }
+  .fact .fn{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17px; margin-bottom:4px; }
+  .fact .fd{ font-size:14.5px; color:#5c6875; line-height:1.5; }
+  @media(max-width:880px){ .about .wrap{ flex-direction:column; } }
+
+  /* ---------- footer ---------- */
+  footer{ background:#070D18; padding:52px 0; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  footer .l{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:18px; }
+  footer .r{ font-family:'Space Mono',monospace; font-size:12.5px; color:#5d6b80; }
+
+  /* ---------- reveal animation ---------- */
+  .js .rv{ opacity:0; }
+  .js .rv.in{ animation:rise .7s cubic-bezier(.2,.7,.3,1) both; }
+  .js .rv.shown{ opacity:1 !important; }
+  @keyframes rise{ from{ opacity:0; transform:translateY(30px); } to{ opacity:1; transform:translateY(0); } }
+  @media (prefers-reduced-motion: reduce){ .js .rv{ opacity:1; } .js .rv.in{ animation:none; } }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="nav">
-  <a href="#" class="logo">Peter Stam</a>
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#top">Peter Stam<span class="dot">.</span></a>
+  <div class="navlinks">
+    <a href="#book1">Book 1</a>
+    <a href="#book2">Book 2</a>
+    <a href="#book3">Book 3</a>
+    <a href="#about">About</a>
+    <a class="cta" href="https://hansolo42.gumroad.com" target="_blank" rel="noopener">Get the books</a>
   </div>
-</nav>
+</div></nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-circle-1"></div>
-  <div class="hero-circle-2"></div>
-  <div class="hero-tag">Author · Maker · Builder</div>
-  <h1>
-    Peter
-    <span class="accent">Stam</span>
-  </h1>
-  <p class="hero-desc">I write books about building things — with AI, with 3D printers, and whatever comes next.</p>
-  <a href="#books" class="hero-btn">See My Books ↓</a>
-  <p class="hero-stats">2 books published · 103 pages total</p>
-</section>
-
-<!-- BOOKS -->
-<section id="books">
-  <div class="books-wrap">
-    <h2 class="section-title">Books</h2>
-    <div class="section-line"></div>
-
-    <div class="books-list">
-
-      <!-- BOOK 1: AI Book Blueprint -->
-      <div class="book-card" data-anim>
-        <div class="book-header" style="background: linear-gradient(135deg, #e05a2b, #c44a1f);">
-          <div class="circle-1"></div>
-          <div class="circle-2"></div>
-          <div class="book-info">
-            <span class="book-badge">NEW</span>
-            <h3 class="book-title">The AI Book Blueprint</h3>
-            <p class="book-subtitle">The Complete Guide to Writing, Publishing, and Promoting Your Book with AI</p>
-          </div>
-          <div class="book-price-area">
-            <div class="book-price">€1</div>
-            <div class="book-meta">52 pages · 18 ch.</div>
-          </div>
-        </div>
-        <div class="book-content">
-          <p class="label">What's Inside</p>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#e05a2b">→</span><span class="highlight-text">Write with Claude without sounding like a robot</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#e05a2b">→</span><span class="highlight-text">5-pass editing system that saves real money</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#e05a2b">→</span><span class="highlight-text">Sell on Gumroad + Amazon KDP print-on-demand</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#e05a2b">→</span><span class="highlight-text">Platform-specific promotion strategies</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#e05a2b">→</span><span class="highlight-text">From idea to published in 4-6 months</span></div>
-          <a href="https://hansolo42.gumroad.com/l/theaibook" target="_blank" rel="noopener noreferrer" class="book-buy-btn" style="background:#e05a2b; box-shadow: 0 4px 16px #e05a2b33;">Get This Book →</a>
-        </div>
+<header class="hero" id="top">
+  <div class="grid"></div>
+  <div class="wrap">
+    <div class="hero-left">
+      <div class="kicker rv"><span class="pulse"></span>The Peter Stam Series · 3 Books</div>
+      <h1 class="big rv">I write books<br>about <span class="a1">building</span><br><span class="a2">real</span> <span class="a3">things</span>.</h1>
+      <p class="hero-sub rv">With AI. With 3D printers. And turning both into a real business. Three books, written and designed by an 11-year-old who actually did it — no fluff, no fake stories.</p>
+      <div class="hero-cta rv">
+        <a class="btn primary" href="#book1">Explore the series ↓</a>
+        <a class="btn ghost" href="https://hansolo42.gumroad.com" target="_blank" rel="noopener">Buy on Gumroad</a>
       </div>
-
-      <!-- BOOK 2: 3D Printing Guide -->
-      <div class="book-card" data-anim>
-        <div class="book-header" style="background: linear-gradient(135deg, #2a7de0, #1f5fc4);">
-          <div class="circle-1"></div>
-          <div class="circle-2"></div>
-          <div class="book-info">
-            <span class="book-badge">NEW</span>
-            <h3 class="book-title">The Complete Guide to 3D Printing</h3>
-            <p class="book-subtitle">From First Print to Profitable Business — Everything About Printers, Filaments, Techniques, and Turning Your Passion Into Profit</p>
-          </div>
-          <div class="book-price-area">
-            <div class="book-price">€1</div>
-            <div class="book-meta">51 pages · 13 ch.</div>
-          </div>
-        </div>
-        <div class="book-content">
-          <p class="label">What's Inside</p>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#2a7de0">→</span><span class="highlight-text">Every printer type explained: FDM, resin, SLA, SLS</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#2a7de0">→</span><span class="highlight-text">Complete filament guide — 30+ materials covered in depth</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#2a7de0">→</span><span class="highlight-text">Slicer deep-dives: PrusaSlicer, Cura, OrcaSlicer</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#2a7de0">→</span><span class="highlight-text">Troubleshooting every common print problem</span></div>
-          <div class="highlight-row"><span class="highlight-arrow" style="color:#2a7de0">→</span><span class="highlight-text">Build a real 3D printing business with pricing formulas</span></div>
-          <a href="https://hansolo42.gumroad.com/l/3Dprintingguide" target="_blank" rel="noopener noreferrer" class="book-buy-btn" style="background:#2a7de0; box-shadow: 0 4px 16px #2a7de033;">Get This Book →</a>
-        </div>
+      <div class="hero-note rv">Pay what you want — from €1. Instant PDF download.</div>
+    </div>
+    <div class="hero-right rv">
+      <div class="fan">
+        <img class="c1" src="covers/book1.jpg" alt="The AI Book Blueprint cover">
+        <img class="c2" src="covers/book2.jpg" alt="The Complete Guide to 3D Printing cover">
+        <img class="c3" src="covers/book3.jpg" alt="Making Money with 3D Printing cover">
       </div>
+    </div>
+  </div>
+</header>
 
-      <!-- ADD MORE BOOKS: copy a book-card block above, change the title, subtitle, colors, highlights, link, and price -->
+<div class="strip"><div class="wrap">
+  <div class="stat rv"><div class="n">3</div><div class="l">Books</div></div>
+  <div class="stat rv"><div class="n">186</div><div class="l">Pages</div></div>
+  <div class="stat rv"><div class="n">47</div><div class="l">Chapters</div></div>
+  <div class="stat rv"><div class="n">€1+</div><div class="l">Each</div></div>
+  <div class="stat rv"><div class="n">11</div><div class="l">Year-old author</div></div>
+</div></div>
 
+<section class="book b1" id="book1">
+  <div class="wrap">
+    <div class="bcover rv"><img src="covers/book1.jpg" alt="The AI Book Blueprint — cover"></div>
+    <div class="binfo">
+      <span class="booktag rv">Book 01 — The Blueprint</span>
+      <h2 class="rv">The AI Book Blueprint</h2>
+      <p class="desc rv">Write, publish, and promote your book with artificial intelligence. The complete guide — from a blank page to a published book on Gumroad and Amazon, in weeks instead of years.</p>
+      <ul class="feat">
+        <li class="rv">An honest field guide to every major AI — which write well, and which to skip</li>
+        <li class="rv">The Book Bible workflow that keeps a whole book consistent</li>
+        <li class="rv">The five-pass editing system professionals use</li>
+        <li class="rv">Selling on Gumroad + Amazon KDP, and launching like a campaign</li>
+      </ul>
+      <div class="rv">
+        <a class="bbtn" href="https://hansolo42.gumroad.com/l/theaibook" target="_blank" rel="noopener">Get Book 1 →</a>
+        <span class="price">€1+ · pay what you want</span>
+      </div>
+      <div class="bmeta rv">18 chapters · 5 parts · instant PDF</div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-wrap" data-anim>
-    <h2 class="section-title">About Peter Stam</h2>
-    <div class="section-line"></div>
-    <p class="about-bio">I'm Peter, 11 years old, student at Herder Gymnasium. I write books about building things — with AI, with 3D printers, and whatever comes next. I like making complicated stuff simple.</p>
-    <a href="https://hansolo42.gumroad.com" target="_blank" rel="noopener noreferrer" class="about-btn">All Books on Gumroad →</a>
-    <div class="about-stats">2 books · 103 pages · 31 chapters · 2026</div>
+<section class="book b2 flip" id="book2">
+  <div class="wrap">
+    <div class="bcover rv"><img src="covers/book2.jpg" alt="The Complete Guide to 3D Printing — cover"></div>
+    <div class="binfo">
+      <span class="booktag rv">Book 02 — The Guide</span>
+      <h2 class="rv">The Complete Guide to 3D Printing</h2>
+      <p class="desc rv">Everything about printers, filaments, and techniques — from your very first print to work you'd be proud to sell. The reference book to keep next to your printer.</p>
+      <ul class="feat">
+        <li class="rv">Every printer type explained, and the best machines by budget</li>
+        <li class="rv">The complete filament guide — 18+ materials with real settings</li>
+        <li class="rv">Troubleshooting every common failure, symptom by symptom</li>
+        <li class="rv">Post-processing, safety, and a full glossary</li>
+      </ul>
+      <div class="rv">
+        <a class="bbtn" href="https://hansolo42.gumroad.com/l/3Dprintingguide" target="_blank" rel="noopener">Get Book 2 →</a>
+        <span class="price">€1+ · pay what you want</span>
+      </div>
+      <div class="bmeta rv">13 chapters · 3 appendices · instant PDF</div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>Peter Stam · 2026</footer>
+<section class="book b3" id="book3">
+  <div class="wrap">
+    <div class="bcover rv"><img src="covers/book3.jpg" alt="Making Money with 3D Printing — cover"></div>
+    <div class="binfo">
+      <span class="booktag rv">Book 03 — The Business</span>
+      <h2 class="rv">Making Money with 3D Printing</h2>
+      <p class="desc rv">From your first paid print to a real business — Etsy, digital files, local B2B, and print farms. Including the chapter nobody else writes: what I actually sold, honestly.</p>
+      <ul class="feat">
+        <li class="rv">The pricing formula that stops you working for minimum wage</li>
+        <li class="rv">Five business models, and how to pick yours</li>
+        <li class="rv">Local B2B — the hidden goldmine most makers overlook</li>
+        <li class="rv">A week-by-week roadmap for your first 90 days</li>
+      </ul>
+      <div class="rv">
+        <a class="bbtn" href="https://hansolo42.gumroad.com/xbzcof" target="_blank" rel="noopener">Get Book 3 →</a>
+        <span class="price">€1+ · pay what you want</span>
+      </div>
+      <div class="bmeta rv">16 chapters · the real numbers · instant PDF</div>
+    </div>
+  </div>
+</section>
+
+<section class="bundle" id="bundle">
+  <div class="wrap">
+    <h2 class="rv">Get the <span class="g">whole series</span>.</h2>
+    <p class="rv">From writing your first book with AI, to mastering the printer, to making real money with it. Three books, one story — the complete builder's path.</p>
+    <div class="minis rv">
+      <img src="covers/book1.jpg" alt="Book 1">
+      <img src="covers/book2.jpg" alt="Book 2">
+      <img src="covers/book3.jpg" alt="Book 3">
+    </div>
+    <div class="rv">
+      <a class="btn primary" href="https://hansolo42.gumroad.com" target="_blank" rel="noopener">Get all three on Gumroad →</a>
+    </div>
+  </div>
+</section>
+
+<section class="peek" id="peek">
+  <div class="wrap">
+    <h2 class="rv">Peek inside.</h2>
+    <p class="sub rv">Real pages from the books — each one designed like it means it, because it does.</p>
+    <div class="peekrow">
+      <div class="pcard rv"><img src="pages/peek1.jpg" alt="Book 1 sample — the AI field guide" loading="lazy"><div class="pl">Book 1 · The AI field guide</div></div>
+      <div class="pcard rv"><img src="pages/peek2.jpg" alt="Book 2 sample — the filament quick reference" loading="lazy"><div class="pl">Book 2 · Filament reference</div></div>
+      <div class="pcard rv"><img src="pages/peek3.jpg" alt="Book 3 sample — the pricing formula" loading="lazy"><div class="pl">Book 3 · The pricing formula</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="col1">
+      <h2 class="rv">About the author</h2>
+      <p class="rv">I'm Peter. I'm 11, I go to Herder Gymnasium in Berlin, and I make things — books, 3D prints, games, websites. This whole series exists because my dad made a book with AI, I decided I could do it better, and then I did it three times.</p>
+      <p class="rv">Everything in these books is real. The workflows are the ones I actually used. The 3D printing advice comes from real prints (and real failures). And the business book ends with exactly what I've sold — dragons and whistles to kids at school — because honest numbers beat big promises.</p>
+      <p class="rv">I also wrote <a href="https://raiseabuilder.com" style="font-weight:700; border-bottom:2px solid #159A57;">Raise a Builder</a> with my dad — a book for parents about raising kids who make things.</p>
+    </div>
+    <div class="facts">
+      <div class="fact rv"><div class="fn">📘 Writes with AI</div><div class="fd">All three books were written, edited, and designed with AI — using exactly the method Book 1 teaches.</div></div>
+      <div class="fact rv"><div class="fn">🔶 Prints for real</div><div class="fd">Sells 3D prints at school — dragons, whistles, and whatever's cool that week.</div></div>
+      <div class="fact rv"><div class="fn">🟢 Builds in public</div><div class="fd">Featured in Make: magazine with Raise a Builder, the parenting book he co-wrote at 11.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <h2 class="rv">Questions</h2>
+    <details class="rv"><summary>What do I actually get?</summary><p>Instant PDF downloads, readable on any device — phone, tablet, computer, or printed out. No apps, no accounts, no DRM.</p></details>
+    <details class="rv"><summary>Why are they only €1?</summary><p>Pay what you want, from €1. I'd rather a thousand people read them than a few. If a book helps you, you can always pay more — some people do, and it's awesome.</p></details>
+    <details class="rv"><summary>Do I need to read them in order?</summary><p>No. Each book stands alone. But they do tell one story — write with AI (1), master the printer (2), make money with it (3) — so the order is there if you want the full path.</p></details>
+    <details class="rv"><summary>Was this really written by an 11-year-old?</summary><p>Yes — with AI as the assistant, and me directing, editing, and deciding everything. That's literally the method Book 1 teaches. The books are the proof it works.</p></details>
+    <details class="rv"><summary>I bought one — can I get help?</summary><p>The books cover the questions I hear the most. If you're stuck on something, the communities listed in the resources sections are genuinely helpful and fast.</p></details>
+  </div>
+</section>
+
+<section class="also">
+  <div class="wrap">
+    <span class="at rv">👨‍👦 Also by Peter: <em>Raise a Builder</em> — the book he wrote with his dad, for parents.</span>
+    <a class="ab rv" href="https://raiseabuilder.com" target="_blank" rel="noopener">Visit raiseabuilder.com →</a>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="l">Peter Stam<span style="color:#4ED88A">.</span></div>
+  <div class="r">© 2026 Peter Stam · peterstam.eu · Made with AI, by a human</div>
+</div></footer>
 
 <script>
-// Nav scroll effect
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// Scroll-in animations
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) e.target.classList.add('visible');
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
+  // nav shadow
+  (function(){
+    var nav = document.getElementById('nav');
+    function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 10); }
+    window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
+  })();
+  // cascade reveal
+  (function(){
+    var els = document.querySelectorAll('.rv');
+    els.forEach(function(el, i){ el.style.animationDelay = ((i % 6) * 0.08) + 's'; });
+    function show(el){
+      el.classList.add('in');
+      el.addEventListener('animationend', function(){
+        el.classList.remove('in'); el.classList.add('shown'); el.style.animationDelay = '';
+      }, { once:true });
+    }
+    if(!('IntersectionObserver' in window)){ els.forEach(function(el){ el.classList.add('shown'); }); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ show(e.target); io.unobserve(e.target); } });
+    }, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
 </script>
 </body>
 </html>
